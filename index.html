@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misión micro:bit - Introducción y Programación por Bloques</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <!--
+    ==========================================================================
+    DOCUMENTO DE DISEÑO PEDAGÓGICO (Evaluación Interna - Sprint 3):
+    - Propósito de Aprendizaje 1: Diseñar y desarrollar programas en entornos 
+      de programación por bloques con estructuras anidadas.
+    - Propósito de Aprendizaje 2: Construir modelos de automatismo y robótica 
+      básicos con sensores y actuadores.
+    ==========================================================================
+  -->
+
+  <!-- Encabezado con Panel de Gamificación -->
+  <header>
+    <div class="header-container">
+      <h1>Misión micro:bit: Reactivando la Estación</h1>
+      <p class="author-tag">Entregable Final - Módulo 1 | Desarrollado por Fabricio Pirez</p>
+      
+      <!-- Panel de Gamificación HUD -->
+      <div class="gamification-panel">
+        <div class="stats-row">
+          <div class="xp-badge">⚡ XP: <span id="xp-score">0</span> / 300</div>
+          <div class="rank-badge">🎖️ Rango: <span id="user-rank">Cadete de Sistemas</span></div>
+        </div>
+        <div class="progress-bar-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progress-container-aria">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Briefing Narrativo e Introducción -->
+    <article class="narrative-briefing">
+      <h2>Briefing de Misión: Diagnóstico e Instalación</h2>
+      <p>
+        ¡Bienvenido/a al equipo técnico! La estación meteorológica y de monitoreo ha sufrido una desconexión. 
+        Para reactivar las funciones automatizadas, debes programar la unidad de procesamiento central utilizando la tarjeta <strong>micro:bit</strong>. 
+        Revisa los conceptos clave antes de iniciar los procedimientos de calibración:
+      </p>
+
+      <div class="concept-grid">
+        <section class="concept-card">
+          <div class="card-icon">📟</div>
+          <h3>Micro:bit</h3>
+          <p>Pequeña placa programable diseñada para aprender robótica y ciencias de la computación de forma sencilla y práctica.</p>
+        </section>
+        <section class="concept-card">
+          <div class="card-icon">📡</div>
+          <h3>Sensores (Entrada)</h3>
+          <p>Componentes integrados que capturan datos del entorno exterior (botones, luz, temperatura, acelerómetro).</p>
+        </section>
+        <section class="concept-card">
+          <div class="card-icon">📢</div>
+          <h3>Actuadores (Salida)</h3>
+          <p>Dispositivos que ejecutan acciones físicas o señales en el entorno (pantalla de 25 LEDs, altavoz integrados).</p>
+        </section>
+        <section class="concept-card">
+          <div class="card-icon">🧩</div>
+          <h3>Anidación</h3>
+          <p>Estructura lógica donde colocas un bloque dentro de otro en MakeCode para evaluar condiciones repetidamente.</p>
+        </section>
+      </div>
+
+      <figure class="video-section">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/rGVJtPt01gc" title="Video inductivo: ¿Qué es la placa micro:bit?" allowfullscreen></iframe>
+        </div>
+        <figcaption>Video de Inducción: ¿Qué es la placa micro:bit?</figcaption>
+      </figure>
+    </article>
+
+    <!-- Desafíos Prácticos Gamificados -->
+    <section class="challenges-section">
+      <h2>Desafíos de Calibración de Sistemas</h2>
+
+      <form id="mission-form" onsubmit="return false;">
+        
+        <!-- Desafío 1 -->
+        <fieldset class="challenge-fieldset" id="fieldset-act1">
+          <legend>Desafío 1: Reconocimiento de Sensores de Entrada</legend>
+          <p class="question-text">Queremos crear una alarma que se active si alguien mueve o agita la tarjeta micro:bit. ¿Qué componente interno actúa como el sensor de entrada para detectar ese movimiento?</p>
+          
+          <div class="options-group">
+            <label class="option-label">
+              <input type="radio" name="act1" value="A"> A) La pantalla de 25 LED
+            </label>
+            <label class="option-label">
+              <input type="radio" name="act1" value="B"> B) El acelerómetro
+            </label>
+            <label class="option-label">
+              <input type="radio" name="act1" value="C"> C) El altavoz integrado
+            </label>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="evaluateActivity('act1')">Comprobar Respuesta</button>
+          <div id="fb-act1" class="feedback-box" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Desafío 2 -->
+        <fieldset class="challenge-fieldset" id="fieldset-act2">
+          <legend>Desafío 2: Análisis de Anidación en MakeCode</legend>
+          <p class="question-text">Diseñas un programa para que la micro:bit revise de forma continua si la luz ambiental es baja (&lt; 50) y, en ese caso, muestre una carita triste. ¿Cómo se deben organizar los bloques?</p>
+          
+          <div class="options-group">
+            <label class="option-label">
+              <input type="radio" name="act2" value="A"> A) Anidar el bloque de decisión <code>si nivel de luz &lt; 50</code> dentro del bucle <code>para siempre</code>.
+            </label>
+            <label class="option-label">
+              <input type="radio" name="act2" value="B"> B) Anidar el bucle <code>para siempre</code> dentro del bloque de decisión <code>si nivel de luz &lt; 50</code>.
+            </label>
+            <label class="option-label">
+              <input type="radio" name="act2" value="C"> C) Colocar los dos bloques sueltos sin meter uno dentro del otro.
+            </label>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="evaluateActivity('act2')">Comprobar Respuesta</button>
+          <div id="fb-act2" class="feedback-box" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Desafío 3 -->
+        <fieldset class="challenge-fieldset" id="fieldset-act3">
+          <legend>Desafío 3: Identificación de Actuadores en Robótica</legend>
+          <p class="question-text">En una estación meteorológica, la micro:bit mide la temperatura y, si supera los 30°C, hace sonar un pitido por el altavoz. ¿Qué función cumple el altavoz en esta secuencia?</p>
+          
+          <div class="options-group">
+            <label class="option-label">
+              <input type="radio" name="act3" value="A"> A) Es un sensor que recolecta datos del ambiente.
+            </label>
+            <label class="option-label">
+              <input type="radio" name="act3" value="B"> B) Es un actuador que ejecuta una acción hacia el entorno.
+            </label>
+            <label class="option-label">
+              <input type="radio" name="act3" value="C"> C) Es una estructura iterativa de programación.
+            </label>
+          </div>
+
+          <button type="button" class="btn-submit" onclick="evaluateActivity('act3')">Comprobar Respuesta</button>
+          <div id="fb-act3" class="feedback-box" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Botón Reiniciar -->
+        <div class="actions-row">
+          <button type="button" class="btn-reset" onclick="resetMission()">🔄 Reiniciar Misión</button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- Recursos Adicionales -->
+    <aside class="resources-section">
+      <h3>📚 Recursos y Documentación Recomendada</h3>
+      <ul>
+        <li><a href="https://ceibal.edu.uy/plataformas-y-programas/microbit/conocenos/" target="_blank" rel="noopener">Micro:bit Ceibal - Conócenos</a></li>
+        <li><a href="https://rea.ceibal.edu.uy/rea/sensores" target="_blank" rel="noopener">REA Ceibal - Sensores y Actuadores</a></li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <section class="accessibility-note">
+        <h4>Nota de Accesibilidad Web (DUA / W3C)</h4>
+        <p>Se estructuraron las preguntas mediante elementos semánticos <code>&lt;fieldset&gt;</code> y <code>&lt;legend&gt;</code>. Esto asegura una óptima experiencia para usuarios de lectores de pantalla (cumpliendo con las pautas W3C / DUA), agrupando conceptualmente cada pregunta con sus respectivas opciones de respuesta.</p>
+      </section>
+
+      <section class="bibliography">
+        <h4>Bibliografía</h4>
+        <p>Ceibal. (s. f.). <em>Conócenos - micro:bit</em>. Recuperado el 9 de septiembre de 2026, de <a href="https://ceibal.edu.uy/plataformas-y-programas/microbit/conocenos/" target="_blank" rel="noopener">https://ceibal.edu.uy/plataformas-y-programas/microbit/conocenos/</a></p>
+        <p>Ceibal. (s. f.). <em>Sensores</em>. Recursos Educativos Abiertos (REA). Recuperado el 9 de septiembre de 2026, de <a href="https://rea.ceibal.edu.uy/rea/sensores" target="_blank" rel="noopener">https://rea.ceibal.edu.uy/rea/sensores</a></p>
+      </section>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
